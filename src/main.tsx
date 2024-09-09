@@ -2,8 +2,10 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
 import Layout from "./components/Layout";
 
-// Importatition du styles
+// Importation du styles
 import "./styles/index.css";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,4 +19,8 @@ const router = createBrowserRouter(
   )
 );
 
-ReactDOM.createRoot(document.getElementById("root")!).render(<RouterProvider router={router} />);
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
+);
