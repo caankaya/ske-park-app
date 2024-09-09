@@ -1,7 +1,9 @@
+import { Outlet } from "react-router-dom";
+
 export default function Layout() {
   return (
     <div className="layout">
-      <p className="text-base">Hello World</p>
+      <Outlet />
     </div>
   );
 }

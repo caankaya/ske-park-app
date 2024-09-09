@@ -1,11 +1,15 @@
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
+import { library } from "@fortawesome/fontawesome-svg-core";
 import Layout from "./components/Layout";
 
 // Importation du styles
 import "./styles/index.css";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { far } from "@fortawesome/free-regular-svg-icons";
+library.add(fas, far);
 
 const router = createBrowserRouter(
   createRoutesFromElements(
