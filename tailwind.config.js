@@ -11,6 +11,11 @@ export default {
       warning: "rgb(239 68 68)",
       info: "rgb(6 182 212)",
     },
+    screens: {
+      tablet: "640px",
+      laptop: "1024px",
+      desktop: "1280px",
+    },
   },
   plugins: [],
 };
