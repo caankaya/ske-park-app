@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import testReducer from "./reducers/test";
+import headerReducer from "./reducers/header";
 
 const store = configureStore({
   reducer: {
-    test: testReducer,
+    header: headerReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
