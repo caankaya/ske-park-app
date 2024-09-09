@@ -1,19 +1,18 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 
 interface TestState {
-  test: string | null;
+  burger: boolean;
 }
 
 const initialState: TestState = {
-  test: null,
+  burger: false,
 };
 
-export const testAction = createAction<string>("test/test");
+export const toggleBurger = createAction<boolean>("Toggle menu burger/Test reducer");
 
 const testReducer = createReducer(initialState, (builder) => {
-  builder.addCase(testAction, (state, action) => {
-    state.test = "test";
-    console.log("action :", action);
+  builder.addCase(toggleBurger, (state) => {
+    state.burger = !state.burger;
   });
 });
 

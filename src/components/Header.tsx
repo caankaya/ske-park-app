@@ -1,36 +1,61 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../redux/types";
+import { toggleBurger } from "../redux/reducers/test";
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleClick = () => {
-    setIsOpen(!isOpen);
-  };
+  const dispatch = useAppDispatch();
+  const burger = useAppSelector((state) => state.test.burger);
 
   return (
     <div>
-      <div className="header bg-primary w-1/2 m-auto mt-2 h-10 rounded-lg flex items-center justify-start">
-        <button className="text-secondary ml-2 absolute">
+      <div
+        className={`header bg-primary w-1/2 m-auto mt-2 h-10 rounded-lg flex items-center justify-start relative px-5 duration-200 ${
+          burger && "rounded-br-none"
+        }`}
+      >
+        <button className="text-secondary absolute">
           <FontAwesomeIcon icon={"fa-solid fa-house" as IconProp} size="lg" />
         </button>
         <p className="text-secondary text-2xl font-bold m-auto">SKE PARK</p>
-        <button onClick={handleClick} className="flex flex-col justify-center items-center mr-2">
+        <button
+          onClick={() => {
+            dispatch(toggleBurger(!burger));
+          }}
+          className="flex flex-col justify-center items-center"
+        >
           <span
             className={`bg-secondary block transition-all duration-300 ease-out 
-                    h-0.5 w-6 rounded-sm ${isOpen ? "rotate-45 translate-y-1" : "-translate-y-0.5"}`}
+                    h-0.5 w-6 rounded-sm ${burger ? "rotate-45 translate-y-1" : "-translate-y-0.5"}`}
           ></span>
           <span
             className={`bg-secondary block transition-all duration-300 ease-out 
-                    h-0.5 w-6 rounded-sm my-0.5 ${isOpen ? "opacity-0" : "opacity-100"}`}
+                    h-0.5 w-6 rounded-sm my-0.5 ${burger ? "opacity-0" : "opacity-100"}`}
           ></span>
           <span
             className={`bg-secondary block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${
-              isOpen ? "-rotate-45 -translate-y-1" : "translate-y-0.5"
+              burger ? "-rotate-45 -translate-y-1" : "translate-y-0.5"
             }`}
           ></span>
         </button>
+        <div
+          className={`absolute bg-primary w-[20%] right-0 top-10 rounded-b-lg ${
+            burger ? "opacity-1" : "opacity-0"
+          } duration-200`}
+        >
+          <ul className="text-secondary flex flex-col text-center gap-y-5 py-2">
+            <li>
+              <Link to={"/#"}>Lien 1</Link>
+            </li>
+            <li>
+              <Link to={"/#"}>Lien 2</Link>
+            </li>
+            <li>
+              <Link to={"/#"}>Lien 3</Link>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );
