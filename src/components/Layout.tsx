@@ -1,7 +1,7 @@
 export default function Layout() {
   return (
     <div className="layout">
-      <p className="text-pink-500">Hello World</p>
+      <p className="text-base">Hello World</p>
     </div>
   );
 }
