@@ -3,7 +3,7 @@ import Header from "./Header";
 
 export default function Layout() {
   return (
-    <div className="layout h-screen w-full flex items-start justify-center">
+    <div className="w-full h-screen px-2 bg-base">
       <Header />
       <Outlet />
     </div>

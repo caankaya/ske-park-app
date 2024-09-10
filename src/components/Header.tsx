@@ -10,40 +10,42 @@ export default function Header() {
 
   return (
     <div
-      className={`header flex items-center justify-between relative bg-primary laptop:w-1/2 w-full mt-2 mx-5 px-5 py-2 rounded-lg ${
+      className={`sticky top-5 z-10 m-auto flex w-full items-center justify-between rounded-lg bg-primary px-5 py-2 laptop:w-1/2 ${
         burger && "rounded-br-none"
       }`}
     >
       <button className="text-secondary">
         <FontAwesomeIcon icon={"fa-solid fa-house" as IconProp} size="lg" />
       </button>
-      <p className="text-secondary text-2xl font-bold">SKE PARK</p>
+      <p className="text-2xl font-bold text-secondary">SKE PARK</p>
       <button
         onClick={() => {
           dispatch(toggleBurger(burger));
         }}
-        className="flex flex-col justify-center items-center"
+        className="flex flex-col items-center justify-center"
       >
         <span
-          className={`bg-secondary block transition-all duration-300 ease-out 
-                    h-0.5 w-6 rounded-sm ${burger ? "rotate-45 translate-y-1" : "-translate-y-0.5"}`}
+          className={`block h-0.5 w-6 rounded-sm bg-secondary transition-all duration-300 ease-out ${
+            burger ? "translate-y-1 rotate-45" : "-translate-y-0.5"
+          }`}
         ></span>
         <span
-          className={`bg-secondary block transition-all duration-300 ease-out 
-                    h-0.5 w-6 rounded-sm my-0.5 ${burger ? "opacity-0" : "opacity-100"}`}
+          className={`my-0.5 block h-0.5 w-6 rounded-sm bg-secondary transition-all duration-300 ease-out ${
+            burger ? "opacity-0" : "opacity-100"
+          }`}
         ></span>
         <span
-          className={`bg-secondary block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${
-            burger ? "-rotate-45 -translate-y-1" : "translate-y-0.5"
+          className={`block h-0.5 w-6 rounded-sm bg-secondary transition-all duration-300 ease-out ${
+            burger ? "-translate-y-1 -rotate-45" : "translate-y-0.5"
           }`}
         ></span>
       </button>
       <div
-        className={`absolute bg-primary w-[20%] right-0 top-10 rounded-b-lg ${
+        className={`absolute right-0 top-10 w-1/3 rounded-b-lg bg-primary laptop:w-[20%] ${
           burger ? "opacity-1" : "opacity-0"
         } duration-200`}
       >
-        <ul className="text-secondary flex flex-col text-center gap-y-5 py-2">
+        <ul className="flex flex-col py-2 text-sm text-center gap-y-5 text-secondary">
           <li>
             <Link to={"/#"}>Lien 1</Link>
           </li>
