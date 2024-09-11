@@ -13,7 +13,7 @@ export default function Barriers() {
           }}
         ></button>
         <button
-          className={`hover:bg-warninghover size-10 rounded-full bg-warning text-secondary duration-300 ${activeButton === "CLOSE" && "scale-110 shadow-lg"}`}
+          className={`hover:bg-errorhover size-10 rounded-full bg-error text-secondary duration-300 ${activeButton === "CLOSE" && "scale-110 shadow-lg"}`}
           onClick={() => {
             setActiveButton("CLOSE");
           }}
@@ -25,7 +25,7 @@ export default function Barriers() {
           className={
             activeButton === "OPEN"
               ? "font-bold text-success"
-              : "font-bold text-warning"
+              : "font-bold text-error"
           }
         >
           {activeButton}

@@ -1,8 +1,9 @@
 import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 import instance from "../../axios";
+import { IVehicle } from "../../@types/spot";
 
 interface VehicleState {
-  all: [] | null;
+  all: IVehicle | null;
 }
 
 const initialState: VehicleState = {
@@ -19,8 +20,7 @@ export const getAllVehicles = createAsyncThunk(
 
 const vehicleReducer = createReducer(initialState, (builder) => {
   builder.addCase(getAllVehicles.fulfilled, (state, action) => {
-    console.log("action :", action);
-    console.log("state :", state);
+    state.all = action.payload;
   });
 });
 

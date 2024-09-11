@@ -1,14 +1,19 @@
+import { Car, Motor } from "./vehicle";
+
 export interface ISpot {
-  spot_id: number;
-  spot_number: number;
-  etat: boolean;
-  ticket_reference: string | null;
-  ticket_montant: number | null;
-  start_time: string;
-  vehicle_immatriculation: string | null;
-  vehicle_type: IVehicle | null;
+  id: number;
+  number: number;
+  state: boolean;
+  tickets: Ticket[];
 }
 
-export interface IVehicle {
-  vehicle_type: "Car" | "Motor";
+export interface Ticket {
+  id: number;
+  reference: string;
+  start_time: string;
+  end_time: string;
+  amount: number;
+  id_spot: number;
+  id_vehicle: number;
+  vehicle: Car | Motor;
 }
