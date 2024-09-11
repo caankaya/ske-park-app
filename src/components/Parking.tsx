@@ -5,8 +5,7 @@ export default function Parking({ spots }: { spots: Spot[] }) {
     <div className="relative flex w-full flex-col justify-between gap-y-5 laptop:w-1/2 desktop:flex-row desktop:flex-wrap">
       {spots &&
         spots.map((spot: Spot) => {
-          // Utilisation de .map au lieu de .spots
-          const ticket = spot.tickets[0];
+          const ticket = spot.Ticket[0];
           return (
             <div
               key={spot.id}

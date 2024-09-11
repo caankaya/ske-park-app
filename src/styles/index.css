@@ -6,3 +6,10 @@
 * {
   font-family: Prompt;
 }
+
+select {
+  -webkit-appearance: none; /* Pour Safari et Chrome */
+  -moz-appearance: none; /* Pour Firefox */
+  appearance: none; /* Standard */
+  background: transparent; /* Pour enlever l'arrière-plan si nécessaire */
+}
