@@ -3,7 +3,7 @@ import instance from "../../axios";
 import { ISpot } from "../../@types/spot";
 
 interface SpotState {
-  all: ISpot[] | null;
+  all: ISpot | null;
 }
 
 const initialState: SpotState = {

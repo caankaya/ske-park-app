@@ -3,24 +3,25 @@ import Dashboard from "../components/Dashboard";
 import Parking from "../components/Parking";
 import { useAppDispatch, useAppSelector } from "../redux/types";
 import { getAllSpots } from "../redux/reducers/spot";
-import { ISpot } from "../@types/spot";
 import { getAllVehicles } from "../redux/reducers/vehicle";
+import { ISpot } from "../@types/spot";
 
 export default function Home() {
   const dispatch = useAppDispatch();
-  const spots = useAppSelector((state) => state.spots.all);
+  const spots = useAppSelector((state) => state.spots.all as ISpot);
 
   useEffect(() => {
     dispatch(getAllSpots());
     dispatch(getAllVehicles());
   }, [dispatch]);
+
   return (
     <div className="mt-10 flex flex-col items-center justify-center gap-y-5 bg-base">
       {/* Dashboard */}
-      <Dashboard />
+      {<Dashboard />}
 
-      {/* Parking */}
-      <Parking spots={spots as ISpot[]} />
+      {/* Parking - passe seulement le tableau des spots */}
+      {spots && <Parking spots={spots.spots} />}
     </div>
   );
 }

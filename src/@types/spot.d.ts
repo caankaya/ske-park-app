@@ -1,6 +1,14 @@
-import { Car, Motor } from "./vehicle";
+import { Motor } from "./vehicle";
 
 export interface ISpot {
+  spots: Spot[];
+  total: number;
+  available: number;
+  busy: number;
+  busyPercentage: string;
+}
+
+export interface Spot {
   id: number;
   number: number;
   state: boolean;
@@ -12,7 +20,7 @@ export interface Ticket {
   reference: string;
   start_time: string;
   end_time: string;
-  amount: number;
+  amount: string;
   id_spot: number;
   id_vehicle: number;
   vehicle: Car | Motor;

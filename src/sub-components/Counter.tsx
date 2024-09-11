@@ -2,16 +2,22 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { useAppSelector } from "../redux/types";
 
 export default function Counter() {
+  const available = useAppSelector((state) => state.spots?.all?.available) || 0;
+  const busy = useAppSelector((state) => state.spots?.all?.busy) || 0;
+  const busyPercentage =
+    useAppSelector((state) => state.spots?.all?.busyPercentage) || "0";
+
   return (
     <div className="flex w-full items-center justify-center gap-x-5 rounded-xl bg-secondary p-3 max-laptop:py-5 laptop:w-1/2">
       {/* Barre de progression circulaire */}
       <div className="size-20">
         <CircularProgressbar
-          value={68}
+          value={Number(busyPercentage)} // Convertir en nombre
           maxValue={100}
-          text={`${68}%`}
+          text={`${busyPercentage}%`}
           styles={buildStyles({
             pathColor: "#000",
             textColor: "#000",
@@ -30,8 +36,10 @@ export default function Counter() {
           />
           Etat actuel
         </p>
-        <p className="text-xs text-success">32 places sont disponibles</p>
-        <p className="text-xs text-warning">68 places sont utilisées</p>
+        <p className="text-xs text-success">
+          {available} places sont disponibles
+        </p>
+        <p className="text-xs text-warning">{busy} places sont utilisées</p>
       </div>
     </div>
   );
