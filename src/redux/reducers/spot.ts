@@ -1,19 +1,26 @@
-import { createAction, createReducer } from "@reduxjs/toolkit";
+import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
+import instance from "../../axios";
+import { ISpot } from "../../@types/spot";
 
 interface SpotState {
-  spots: [] | null;
+  all: ISpot[] | null;
 }
 
 const initialState: SpotState = {
-  spots: null,
+  all: null,
 };
 
-export const testAction = createAction<string>("spot/test");
+export const getAllSpots = createAsyncThunk(
+  "Spot reducer/getAllSpots", // nom de l'action
+  async () => {
+    const { data } = await instance.get("/spots/all");
+    return data;
+  },
+);
 
 const spotReducer = createReducer(initialState, (builder) => {
-  builder.addCase(testAction, (state, action) => {
-    console.log("state :", state);
-    console.log("action :", action);
+  builder.addCase(getAllSpots.fulfilled, (state, action) => {
+    state.all = action.payload;
   });
 });
 

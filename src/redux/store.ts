@@ -5,7 +5,7 @@ import spotReducer from "./reducers/spot";
 const store = configureStore({
   reducer: {
     header: headerReducer,
-    spot: spotReducer,
+    spots: spotReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
