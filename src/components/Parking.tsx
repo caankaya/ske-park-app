@@ -20,7 +20,9 @@ export default function Parking({ spots }: { spots: ISpot[] }) {
               </p>
               <p className="text-sm">
                 Heure d'arrivé :{" "}
-                <b>{spot.tickets[0]?.start_time.split("T")[1].split('.000')[0]}</b>
+                <b>
+                  {spot.tickets[0]?.start_time.split("T")[1].split(".000")[0]}
+                </b>
               </p>
               <p className="text-sm">
                 Numéro d'immatricule :{" "}
@@ -28,11 +30,13 @@ export default function Parking({ spots }: { spots: ISpot[] }) {
               </p>
               <p className="text-sm">
                 Type de véhicule :{" "}
-                <b>
-                  {spot.tickets[0]?.vehicle.type === "Car"
-                    ? "Automobile"
-                    : "Moto"}
-                </b>
+                {spot.tickets[0]?.vehicle.type && (
+                  <b>
+                    {spot.tickets[0]?.vehicle.type === "Car"
+                      ? "Automobile"
+                      : "Moto"}
+                  </b>
+                )}
               </p>
             </div>
             {spot.state ? (
