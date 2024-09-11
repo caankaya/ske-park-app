@@ -13,3 +13,9 @@ select {
   appearance: none; /* Standard */
   background: transparent; /* Pour enlever l'arrière-plan si nécessaire */
 }
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset; /* Remplacez 'white' par la couleur de fond souhaitée */
+  box-shadow: 0 0 0 1000px white inset;
+  -webkit-text-fill-color: black; /* Couleur du texte après autofill */
+}
