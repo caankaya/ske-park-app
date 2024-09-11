@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import headerReducer from "./reducers/header";
+import spotReducer from "./reducers/spot";
 
 const store = configureStore({
   reducer: {
     header: headerReducer,
+    spot: spotReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
