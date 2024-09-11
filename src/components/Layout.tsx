@@ -1,9 +1,11 @@
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
+import ParkingModal from "./ParkingModal";
 
 export default function Layout() {
   return (
-    <div className="w-full h-screen px-2 bg-base">
+    <div className="h-screen w-full bg-base px-2">
+      <ParkingModal />
       <Header />
       <Outlet />
     </div>
