@@ -2,11 +2,13 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/types";
-import { toggleBurger } from "../redux/reducers/header";
+import { toggleBurger, toggleInfoModal } from "../redux/reducers/header";
 
 export default function Header() {
   const dispatch = useAppDispatch();
   const burger = useAppSelector((state) => state.header.burger);
+  const isOpen = useAppSelector((state) => state.header.infoModal);
+  console.log("isOpen :", isOpen);
 
   return (
     <div
@@ -14,8 +16,17 @@ export default function Header() {
         burger && "rounded-br-none"
       }`}
     >
-      <button className="text-secondary">
-        <FontAwesomeIcon icon={"fa-solid fa-house" as IconProp} size="lg" />
+      <button
+        className="text-secondary"
+        onClick={() => {
+          dispatch(toggleInfoModal(true));
+        }}
+      >
+        <FontAwesomeIcon
+          icon={"fa-solid fa-circle-exclamation" as IconProp}
+          size="xl"
+          bounce={true}
+        />
       </button>
       <p className="text-2xl font-bold text-secondary">SKE PARK</p>
       <button
@@ -45,7 +56,7 @@ export default function Header() {
           burger ? "opacity-1" : "opacity-0"
         } duration-200`}
       >
-        <ul className="flex flex-col py-2 text-sm text-center gap-y-5 text-secondary">
+        <ul className="flex flex-col gap-y-5 py-2 text-center text-sm text-secondary">
           <li>
             <Link to={"/#"}>Lien 1</Link>
           </li>
