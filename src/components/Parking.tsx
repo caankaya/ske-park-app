@@ -12,6 +12,7 @@ export default function Parking({ spots }: { spots: Spot[] }) {
   const dispatch = useAppDispatch();
   const [resetIt, setResetIt] = useState<boolean>(false);
   const [spotNumber, setSpotNumber] = useState<number | null>(null);
+  const [ticketReference, setTicketReference] = useState<string | null>(null);
 
   return (
     <div className="relative flex w-full flex-col justify-between gap-y-5 laptop:w-1/2 desktop:flex-row desktop:flex-wrap">
@@ -75,6 +76,7 @@ export default function Parking({ spots }: { spots: Spot[] }) {
                 <button
                   className="mb-5 h-8 w-1/2 rounded-lg bg-warning text-sm text-secondary duration-300 hover:bg-warninghover"
                   onClick={() => {
+                    setTicketReference(ticket.reference);
                     setSpotNumber(spot.number);
                     dispatch(toggleLeaveSPotModal());
                   }}
@@ -90,7 +92,10 @@ export default function Parking({ spots }: { spots: Spot[] }) {
         resetIt={resetIt}
         setResetIt={setResetIt}
       />
-      <LeaveSpotModal number={spotNumber as number} />
+      <LeaveSpotModal
+        reference={ticketReference as string}
+        number={spotNumber as number}
+      />
     </div>
   );
 }

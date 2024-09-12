@@ -1,9 +1,16 @@
-import { toggleLeaveSPotModal } from "../redux/reducers/spot";
+import { leaveSpot, toggleLeaveSPotModal } from "../redux/reducers/spot";
 import { useAppDispatch, useAppSelector } from "../redux/types";
 
-export default function LeaveSpotModal({ number }: { number: number }) {
+export default function LeaveSpotModal({
+  reference,
+  number,
+}: {
+  reference: string;
+  number: number;
+}) {
   const dispatch = useAppDispatch();
   const isOpen = useAppSelector((state) => state.spots.leaveSpotModal);
+  console.log("reference :", reference);
   console.log("number :", number);
 
   return (
@@ -31,7 +38,12 @@ export default function LeaveSpotModal({ number }: { number: number }) {
           Vous voulez libérer la place ?
         </p>
         <div className="flex items-center justify-between gap-x-5">
-          <button className="mb-5 h-8 w-1/2 rounded-lg bg-success text-sm text-secondary duration-300 hover:bg-succeshover">
+          <button
+            className="mb-5 h-8 w-1/2 rounded-lg bg-success text-sm text-secondary duration-300 hover:bg-succeshover"
+            onClick={() => {
+              dispatch(leaveSpot({ reference: reference, spotNumber: number }));
+            }}
+          >
             Valider
           </button>
           <button

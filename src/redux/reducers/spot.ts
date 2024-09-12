@@ -6,6 +6,7 @@ import {
 import instance from "../../axios";
 import { ISpot } from "../../@types/spot";
 import { AxiosError } from "axios";
+import { getAllVehicles } from "./vehicle";
 
 interface SpotState {
   all: ISpot | null;
@@ -38,10 +39,20 @@ export const getAllSpots = createAsyncThunk(
 
 export const leaveSpot = createAsyncThunk(
   "The spot reducer/leaveSpot", // nom de l'action
-  async (formData: FormData, { rejectWithValue }) => {
+  async (
+    formData: {
+      reference: string;
+      spotNumber: number;
+    },
+    { dispatch, rejectWithValue },
+  ) => {
     try {
-      const objData = Object.fromEntries(formData);
-      const { data } = await instance.post("/delete", objData);
+      console.log("formData :", formData);
+      const { data } = await instance.post("/ticket/delete", formData);
+      // fermer la modal,
+      dispatch(toggleLeaveSPotModal());
+      dispatch(getAllSpots());
+      dispatch(getAllVehicles());
       return data;
     } catch (error) {
       // Utilisation de l'opérateur optionnel pour éviter 'undefined'
