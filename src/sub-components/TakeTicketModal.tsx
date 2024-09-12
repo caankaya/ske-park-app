@@ -5,28 +5,40 @@ import { useAppDispatch, useAppSelector } from "../redux/types";
 import { toogleTicketModal } from "../redux/reducers/spot";
 import { clearMessage, getTicket } from "../redux/reducers/ticket";
 
-export default function TakeTicketModal({ number }: { number: number }) {
+export default function TakeTicketModal({
+  number,
+  resetIt,
+  setResetIt,
+}: {
+  number: number;
+  resetIt: boolean;
+  setResetIt: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const dispatch = useAppDispatch();
   const ticketModal = useAppSelector((state) => state.spots.ticketModal);
+
   const error = useAppSelector((state) => state.tickets.message);
-  console.log("error :", error);
+
   const {
     register,
     handleSubmit,
     watch,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitSuccessful },
   } = useForm<ITicket>();
 
   const [focusedInputs, setFocusedInputs] = useState({
     immatriculation: false,
     type: false,
   });
-
   const { immatriculation, type } = watch();
 
   const onSubmit = (data: ITicket) => {
-    dispatch(getTicket({ ...data, number }));
+    try {
+      dispatch(getTicket({ ...data, number }));
+    } catch (error) {
+      console.log("error :", error);
+    }
   };
 
   // Fonction pour gérer le focus d'un input
@@ -39,33 +51,29 @@ export default function TakeTicketModal({ number }: { number: number }) {
   };
 
   useEffect(() => {
-    if (error) {
-      setTimeout(() => {
-        dispatch(clearMessage());
-      }, 5000);
+    if (resetIt) {
+      reset();
+      setResetIt(false);
     }
 
-    if (!error && !errors) {
-      reset({
-        immatriculation: "",
-        type: "",
-      });
+    if (error) {
+      setTimeout(() => {}, 5000);
     }
-  }, [dispatch, error, reset, errors]);
+  }, [dispatch, error, errors, reset, isSubmitSuccessful, resetIt, setResetIt]);
 
   return (
     <dialog
       open={ticketModal}
       className="fixed inset-0 z-20 h-screen w-full bg-primary/70"
     >
-      <div className="m-auto size-80 translate-y-1/2 rounded-xl bg-secondary p-5 shadow-xl">
+      <div className="h-30 absolute left-1/2 top-1/2 m-auto w-80 -translate-x-1/2 -translate-y-1/2 transform rounded-xl bg-secondary p-5 shadow-xl">
         <form method="dialog">
           {/* if there is a button in form, it will close the modal */}
           <button
             className="absolute right-2 top-2 flex size-5 items-center justify-center rounded-full bg-primary text-xs font-bold text-secondary"
             onClick={() => {
               dispatch(toogleTicketModal());
-              reset();
+              dispatch(clearMessage());
             }}
           >
             ✕

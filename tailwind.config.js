@@ -18,7 +18,7 @@ export default {
       transparent: "transparent",
     },
     screens: {
-      tablet: "640px",
+      tablet: "769px",
       laptop: "1024px",
       desktop: "1280px",
     },

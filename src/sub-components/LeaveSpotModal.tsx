@@ -11,7 +11,7 @@ export default function LeaveSpotModal({ number }: { number: number }) {
       open={isOpen}
       className="fixed inset-0 z-20 h-screen w-full bg-primary/70"
     >
-      <div className="h-30 m-auto w-80 translate-y-1/2 rounded-xl bg-secondary p-5 shadow-xl">
+      <div className="h-30 absolute left-1/2 top-1/2 m-auto w-80 -translate-x-1/2 -translate-y-1/2 transform rounded-xl bg-secondary p-5 shadow-xl">
         <form method="dialog">
           {/* if there is a button in form, it will close the modal */}
           <button

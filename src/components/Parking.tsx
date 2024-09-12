@@ -10,6 +10,7 @@ import LeaveSpotModal from "../sub-components/LeaveSpotModal";
 
 export default function Parking({ spots }: { spots: Spot[] }) {
   const dispatch = useAppDispatch();
+  const [resetIt, setResetIt] = useState<boolean>(false);
   const [spotNumber, setSpotNumber] = useState<number | null>(null);
 
   return (
@@ -65,6 +66,7 @@ export default function Parking({ spots }: { spots: Spot[] }) {
                   onClick={() => {
                     setSpotNumber(spot.number);
                     dispatch(toogleTicketModal());
+                    setResetIt(true);
                   }}
                 >
                   Prendre un ticket
@@ -83,7 +85,11 @@ export default function Parking({ spots }: { spots: Spot[] }) {
             </div>
           );
         })}
-      <TakeTicketModal number={spotNumber as number} />
+      <TakeTicketModal
+        number={spotNumber as number}
+        resetIt={resetIt}
+        setResetIt={setResetIt}
+      />
       <LeaveSpotModal number={spotNumber as number} />
     </div>
   );

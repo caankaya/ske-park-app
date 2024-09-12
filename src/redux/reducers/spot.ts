@@ -5,6 +5,7 @@ import {
 } from "@reduxjs/toolkit";
 import instance from "../../axios";
 import { ISpot } from "../../@types/spot";
+import { AxiosError } from "axios";
 
 interface SpotState {
   all: ISpot | null;
@@ -20,9 +21,36 @@ const initialState: SpotState = {
 
 export const getAllSpots = createAsyncThunk(
   "Spot reducer/getAllSpots", // nom de l'action
-  async () => {
-    const { data } = await instance.get("/spots/all");
-    return data;
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await instance.get("/spots/all");
+      return data;
+    } catch (error) {
+      // Utilisation de l'opérateur optionnel pour éviter 'undefined'
+      if ((error as AxiosError).response?.data) {
+        return rejectWithValue((error as AxiosError).response?.data);
+      }
+      // Sinon, rejeter l'erreur générique
+      return rejectWithValue((error as Error).message);
+    }
+  },
+);
+
+export const leaveSpot = createAsyncThunk(
+  "The spot reducer/leaveSpot", // nom de l'action
+  async (formData: FormData, { rejectWithValue }) => {
+    try {
+      const objData = Object.fromEntries(formData);
+      const { data } = await instance.post("/delete", objData);
+      return data;
+    } catch (error) {
+      // Utilisation de l'opérateur optionnel pour éviter 'undefined'
+      if ((error as AxiosError).response?.data) {
+        return rejectWithValue((error as AxiosError).response?.data);
+      }
+      // Sinon, rejeter l'erreur générique
+      return rejectWithValue((error as Error).message);
+    }
   },
 );
 
@@ -37,6 +65,10 @@ const spotReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(getAllSpots.fulfilled, (state, action) => {
       state.all = action.payload;
+    })
+    .addCase(leaveSpot.fulfilled, (state, action) => {
+      console.log("state :", state);
+      console.log("action :", action);
     })
     .addCase(toogleTicketModal, (state) => {
       state.ticketModal = !state.ticketModal;
