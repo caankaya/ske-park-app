@@ -47,7 +47,6 @@ export const leaveSpot = createAsyncThunk(
     { dispatch, rejectWithValue },
   ) => {
     try {
-      console.log("formData :", formData);
       const { data } = await instance.post("/ticket/delete", formData);
       // fermer la modal,
       dispatch(toggleLeaveSPotModal());
@@ -76,10 +75,6 @@ const spotReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(getAllSpots.fulfilled, (state, action) => {
       state.all = action.payload;
-    })
-    .addCase(leaveSpot.fulfilled, (state, action) => {
-      console.log("state :", state);
-      console.log("action :", action);
     })
     .addCase(toogleTicketModal, (state) => {
       state.ticketModal = !state.ticketModal;

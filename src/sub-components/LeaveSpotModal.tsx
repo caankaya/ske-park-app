@@ -10,8 +10,6 @@ export default function LeaveSpotModal({
 }) {
   const dispatch = useAppDispatch();
   const isOpen = useAppSelector((state) => state.spots.leaveSpotModal);
-  console.log("reference :", reference);
-  console.log("number :", number);
 
   return (
     <dialog

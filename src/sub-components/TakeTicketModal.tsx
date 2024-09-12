@@ -34,11 +34,7 @@ export default function TakeTicketModal({
   const { immatriculation, type } = watch();
 
   const onSubmit = (data: ITicket) => {
-    try {
-      dispatch(getTicket({ ...data, number }));
-    } catch (error) {
-      console.log("error :", error);
-    }
+    dispatch(getTicket({ ...data, number }));
   };
 
   // Fonction pour gérer le focus d'un input
