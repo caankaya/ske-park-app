@@ -12,7 +12,7 @@ export interface Spot {
   id: number;
   number: number;
   state: boolean;
-  Ticket: Ticket[];
+  tickets: Ticket[];
 }
 
 export interface Ticket {

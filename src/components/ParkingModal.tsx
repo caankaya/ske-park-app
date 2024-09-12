@@ -1,12 +1,20 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { ITicket } from "../@types/ticket";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../redux/types";
+import { toggleModal } from "../redux/reducers/spot";
+import { clearMessage, getTicket } from "../redux/reducers/ticket";
 
-export default function ParkingModal() {
+export default function ParkingModal({ number }: { number: number }) {
+  const dispatch = useAppDispatch();
+  const isOpen = useAppSelector((state) => state.spots.modal);
+  const error = useAppSelector((state) => state.tickets.message);
+  console.log("error :", error);
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm<ITicket>();
 
@@ -17,7 +25,9 @@ export default function ParkingModal() {
 
   const { immatriculation, type } = watch();
 
-  const onSubmit: SubmitHandler<ITicket> = (data) => console.log(data);
+  const onSubmit = (data: ITicket) => {
+    dispatch(getTicket({ ...data, number }));
+  };
 
   // Fonction pour gérer le focus d'un input
   const handleFocus = (inputName: string) => {
@@ -28,21 +38,52 @@ export default function ParkingModal() {
     setFocusedInputs((prev) => ({ ...prev, [inputName]: false }));
   };
 
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => {
+        dispatch(clearMessage());
+      }, 5000);
+    }
+
+    if (!error && !errors) {
+      reset({
+        immatriculation: "",
+        type: "",
+      });
+    }
+  }, [dispatch, error, reset, errors]);
+
   return (
-    <dialog open={true} className="absolute z-20 h-screen w-full bg-primary/70">
+    <dialog
+      open={isOpen}
+      className="fixed inset-0 z-20 h-screen w-full bg-primary/70"
+    >
       <div className="m-auto size-80 translate-y-1/2 rounded-xl bg-secondary p-5 shadow-xl">
-        <p className="mb-10 text-center font-medium uppercase">
+        <form method="dialog">
+          {/* if there is a button in form, it will close the modal */}
+          <button
+            className="absolute right-2 top-2 flex size-5 items-center justify-center rounded-full bg-primary text-xs font-bold text-secondary"
+            onClick={() => {
+              dispatch(toggleModal());
+              reset();
+            }}
+          >
+            ✕
+          </button>
+        </form>
+        <p className="mb-4 text-center font-medium uppercase">
           entrée de véhicule
         </p>
+        {error && <p className="text-center text-xs text-error">{error}</p>}
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="mt-5 flex flex-col items-center gap-y-10 text-sm"
+          className="mt-7 flex flex-col items-center gap-y-10 text-sm"
         >
           {/* Immatriculation */}
           <div className="relative flex w-full flex-col items-center">
             <label
               htmlFor="immatriculation"
-              className={`absolute left-2 ${focusedInputs.immatriculation || immatriculation ? "-top-2" : "top-3"} bg-secondary px-2 text-xs duration-300`}
+              className={`pointer-events-none absolute left-2 ${focusedInputs.immatriculation || immatriculation ? "-top-2" : "top-3"} bg-secondary px-2 text-xs duration-300`}
             >
               Immatriculation
             </label>
@@ -52,9 +93,9 @@ export default function ParkingModal() {
               {...register("immatriculation", {
                 required: "L'immatriculation est requise",
                 pattern: {
-                  value: /^[A-Z]{2}-\d{3}-[A-Z]{2}$/,
+                  value: /^[A-Z]{2,3}-\d{2,3}-[A-Z]{2,3}$/,
                   message:
-                    "Le format de l'immatriculation est invalide. Format attendu : AA-123-AA",
+                    "Le format de l'immatriculation est invalide. Format attendu : AA-12-AA ou AAA-123-ABC.",
                 },
                 onBlur() {
                   handleBlur("immatriculation");
@@ -63,7 +104,7 @@ export default function ParkingModal() {
               onFocus={() => handleFocus("immatriculation")}
             />
             {errors.immatriculation && (
-              <p className="text-error ml-1 mr-auto text-xs">
+              <p className="ml-1 mr-auto text-xs text-error">
                 {errors.immatriculation.message}
               </p>
             )}
@@ -73,7 +114,7 @@ export default function ParkingModal() {
           <div className="relative flex w-full flex-col items-center">
             <label
               htmlFor="type"
-              className={`absolute left-2 ${focusedInputs.type || type ? "-top-2" : "top-3"} bg-secondary px-2 text-xs duration-300`}
+              className={`pointer-events-none absolute left-2 ${focusedInputs.type || type ? "-top-2" : "top-3"} bg-secondary px-2 text-xs duration-300`}
             >
               Type de véhicule
             </label>
@@ -88,13 +129,14 @@ export default function ParkingModal() {
               })}
               onFocus={() => handleFocus("type")}
               onBlur={() => handleBlur("type")}
+              defaultValue=""
             >
-              <option value="" disabled hidden selected></option>
+              <option value="" disabled hidden></option>
               <option value="Car">Automobile</option>
               <option value="Motor">Moto</option>
             </select>
             {errors.type && (
-              <p className="text-error ml-1 mr-auto text-xs">
+              <p className="ml-1 mr-auto text-xs text-error">
                 {errors.type.message}
               </p>
             )}

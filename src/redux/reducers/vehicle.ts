@@ -1,6 +1,6 @@
 import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 import instance from "../../axios";
-import { IVehicle } from "../../@types/spot";
+import { IVehicle } from "../../@types/vehicle";
 
 interface VehicleState {
   all: IVehicle | null;

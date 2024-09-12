@@ -37,9 +37,15 @@ export default function Counter() {
           Etat actuel
         </p>
         <p className="text-xs text-success">
-          {available} places sont disponibles
+          {available <= 1
+            ? available + " place est disponible"
+            : available + " places sont disponibles"}
         </p>
-        <p className="text-xs text-warning">{busy} places sont utilisées</p>
+        <p className="text-xs text-warning">
+          {busy <= 1
+            ? busy + " place est disponible"
+            : busy + " places sont disponibles"}
+        </p>
       </div>
     </div>
   );

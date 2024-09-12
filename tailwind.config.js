@@ -15,6 +15,7 @@ export default {
       errorhover: "#fca5a5",
       info: "#22d3ee",
       infohover: "#0891b2",
+      transparent: "transparent",
     },
     screens: {
       tablet: "640px",
