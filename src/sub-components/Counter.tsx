@@ -11,7 +11,7 @@ export default function Counter() {
     useAppSelector((state) => state.spots?.all?.busyPercentage) || "0";
 
   return (
-    <div className="flex w-full items-center justify-center gap-x-5 rounded-xl bg-secondary p-3 max-laptop:py-5 laptop:w-1/2">
+    <div className="flex w-full items-center justify-center gap-x-5 rounded-xl bg-secondary p-3 shadow-lg max-laptop:py-5 laptop:w-1/2">
       {/* Barre de progression circulaire */}
       <div className="size-20">
         <CircularProgressbar

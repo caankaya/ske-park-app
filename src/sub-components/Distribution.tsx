@@ -1,12 +1,11 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAppSelector } from "../redux/types";
-import { IVehicle } from "../@types/vehicle";
 
 export default function Distribution() {
-  const vehicles: IVehicle = useAppSelector((state) => state.vehicles.all);
+  const vehicles = useAppSelector((state) => state.vehicles.all);
   return (
-    <div className="flex w-full flex-col items-center justify-start gap-y-5 rounded-xl bg-secondary p-3 laptop:w-1/2">
+    <div className="flex w-full flex-col items-center justify-start gap-y-5 rounded-xl bg-secondary p-3 laptop:w-1/2 shadow-lg">
       <p className="text-sm">Répartition des places</p>
       <div className="flex w-full justify-center gap-x-5">
         <div className="flex flex-col">

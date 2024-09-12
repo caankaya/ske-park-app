@@ -6,7 +6,7 @@ import {
 import instance from "../../axios";
 import { ITicket } from "../../@types/ticket";
 import { AxiosError } from "axios"; // Importer AxiosError
-import { getAllSpots, toggleModal } from "./spot";
+import { getAllSpots, toogleTicketModal } from "./spot";
 import { getAllVehicles } from "./vehicle";
 
 interface TicketState {
@@ -24,7 +24,7 @@ export const getTicket = createAsyncThunk(
       const { data } = await instance.post("/ticket/create", objData);
       // Dispatch d'autres actions après la création réussie
       // Fermeture de modal
-      dispatch(toggleModal());
+      dispatch(toogleTicketModal());
       // Récupère toutes les places parking
       dispatch(getAllSpots());
       // Récupère toutes les vehicules

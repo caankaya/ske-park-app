@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { Spot } from "../@types/spot";
-import ParkingModal from "./ParkingModal";
+import TakeTicketModal from "../sub-components/TakeTicketModal";
 import { useAppDispatch } from "../redux/types";
-import { toggleModal } from "../redux/reducers/spot";
+import {
+  toogleTicketModal,
+  toggleLeaveSPotModal,
+} from "../redux/reducers/spot";
+import LeaveSpotModal from "../sub-components/LeaveSpotModal";
 
 export default function Parking({ spots }: { spots: Spot[] }) {
   const dispatch = useAppDispatch();
@@ -60,20 +64,27 @@ export default function Parking({ spots }: { spots: Spot[] }) {
                   className="mb-5 h-8 w-1/2 rounded-lg bg-info text-sm text-secondary duration-300 hover:bg-infohover"
                   onClick={() => {
                     setSpotNumber(spot.number);
-                    dispatch(toggleModal());
+                    dispatch(toogleTicketModal());
                   }}
                 >
                   Prendre un ticket
                 </button>
               ) : (
-                <button className="mb-5 h-8 w-1/2 rounded-lg bg-warning text-sm text-secondary duration-300 hover:bg-warninghover">
+                <button
+                  className="mb-5 h-8 w-1/2 rounded-lg bg-warning text-sm text-secondary duration-300 hover:bg-warninghover"
+                  onClick={() => {
+                    setSpotNumber(spot.number);
+                    dispatch(toggleLeaveSPotModal());
+                  }}
+                >
                   Libérer la place
                 </button>
               )}
             </div>
           );
         })}
-      <ParkingModal number={spotNumber as number} />
+      <TakeTicketModal number={spotNumber as number} />
+      <LeaveSpotModal number={spotNumber as number} />
     </div>
   );
 }

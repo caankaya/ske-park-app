@@ -8,12 +8,14 @@ import { ISpot } from "../../@types/spot";
 
 interface SpotState {
   all: ISpot | null;
-  modal: boolean;
+  ticketModal: boolean;
+  leaveSpotModal: boolean;
 }
 
 const initialState: SpotState = {
   all: null,
-  modal: false,
+  ticketModal: false,
+  leaveSpotModal: false,
 };
 
 export const getAllSpots = createAsyncThunk(
@@ -24,15 +26,23 @@ export const getAllSpots = createAsyncThunk(
   },
 );
 
-export const toggleModal = createAction("The modal entry vehicle toggles");
+export const toogleTicketModal = createAction(
+  "The modal entry vehicle toggles",
+);
+export const toggleLeaveSPotModal = createAction(
+  "The modal leave vehicle toggles",
+);
 
 const spotReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(getAllSpots.fulfilled, (state, action) => {
       state.all = action.payload;
     })
-    .addCase(toggleModal, (state) => {
-      state.modal = !state.modal;
+    .addCase(toogleTicketModal, (state) => {
+      state.ticketModal = !state.ticketModal;
+    })
+    .addCase(toggleLeaveSPotModal, (state) => {
+      state.leaveSpotModal = !state.leaveSpotModal;
     });
 });
 

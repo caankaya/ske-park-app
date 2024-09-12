@@ -2,12 +2,12 @@ import { useForm } from "react-hook-form";
 import { ITicket } from "../@types/ticket";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/types";
-import { toggleModal } from "../redux/reducers/spot";
+import { toogleTicketModal } from "../redux/reducers/spot";
 import { clearMessage, getTicket } from "../redux/reducers/ticket";
 
-export default function ParkingModal({ number }: { number: number }) {
+export default function TakeTicketModal({ number }: { number: number }) {
   const dispatch = useAppDispatch();
-  const isOpen = useAppSelector((state) => state.spots.modal);
+  const ticketModal = useAppSelector((state) => state.spots.ticketModal);
   const error = useAppSelector((state) => state.tickets.message);
   console.log("error :", error);
   const {
@@ -55,7 +55,7 @@ export default function ParkingModal({ number }: { number: number }) {
 
   return (
     <dialog
-      open={isOpen}
+      open={ticketModal}
       className="fixed inset-0 z-20 h-screen w-full bg-primary/70"
     >
       <div className="m-auto size-80 translate-y-1/2 rounded-xl bg-secondary p-5 shadow-xl">
@@ -64,7 +64,7 @@ export default function ParkingModal({ number }: { number: number }) {
           <button
             className="absolute right-2 top-2 flex size-5 items-center justify-center rounded-full bg-primary text-xs font-bold text-secondary"
             onClick={() => {
-              dispatch(toggleModal());
+              dispatch(toogleTicketModal());
               reset();
             }}
           >
