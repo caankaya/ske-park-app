@@ -3,7 +3,7 @@ import {
   createAsyncThunk,
   createReducer,
 } from "@reduxjs/toolkit";
-import instance from "../../axios";
+import axios from "../../axios";
 import { ISpot } from "../../@types/spot";
 import { AxiosError } from "axios";
 import { getAllVehicles } from "./vehicle";
@@ -24,7 +24,7 @@ export const getAllSpots = createAsyncThunk(
   "Spot reducer/getAllSpots", // nom de l'action
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await instance.get("/spots/all");
+      const { data } = await axios.get("/spots/all");
       return data;
     } catch (error) {
       // Utilisation de l'opérateur optionnel pour éviter 'undefined'
@@ -47,7 +47,7 @@ export const leaveSpot = createAsyncThunk(
     { dispatch, rejectWithValue },
   ) => {
     try {
-      const { data } = await instance.post("/ticket/delete", formData);
+      const { data } = await axios.post("/ticket/delete", formData);
       // fermer la modal,
       dispatch(toggleLeaveSPotModal());
       dispatch(getAllSpots());

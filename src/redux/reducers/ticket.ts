@@ -3,7 +3,7 @@ import {
   createAsyncThunk,
   createReducer,
 } from "@reduxjs/toolkit";
-import instance from "../../axios";
+import axios from "../../axios";
 import { ITicket } from "../../@types/ticket";
 import { AxiosError } from "axios"; // Importer AxiosError
 import { getAllSpots, toogleTicketModal } from "./spot";
@@ -21,7 +21,7 @@ export const getTicket = createAsyncThunk(
   "Ticket reducer/getTicket", // nom de l'action
   async (objData: ITicket, { dispatch, rejectWithValue }) => {
     try {
-      const { data } = await instance.post("/ticket/create", objData);
+      const { data } = await axios.post("/ticket/create", objData);
       // Dispatch d'autres actions après la création réussie
       // Fermeture de modal
       dispatch(toogleTicketModal());

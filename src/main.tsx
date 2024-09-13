@@ -15,24 +15,25 @@ import store from "./redux/store";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
-
 import Home from "./pages/Home";
+
 library.add(fas, far, fab);
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />} errorElement={""}>
       <Route errorElement={""}>
-        <Route index element={<Home />} />
-        {/* Compléter le router avec d'autres pages à partir de là*/}
-        {/* Oubliez pas d'ajouter Outlet dans le composant Layout*/}
+        <Route index element={<Home data-testid="home" />} />
       </Route>
     </Route>,
   ),
 );
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+// Exportation par défaut de l'application
+export const App = () => (
   <Provider store={store}>
     <RouterProvider router={router} />
-  </Provider>,
+  </Provider>
 );
+
+ReactDOM.createRoot(document.getElementById("root")!).render(<App />);

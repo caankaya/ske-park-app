@@ -1,5 +1,5 @@
 import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
-import instance from "../../axios";
+import axios from "../../axios";
 import { IVehicle } from "../../@types/vehicle";
 
 interface VehicleState {
@@ -13,7 +13,7 @@ const initialState: VehicleState = {
 export const getAllVehicles = createAsyncThunk(
   "/getAllVehicles", // nom de l'action
   async () => {
-    const { data } = await instance.get("/vehicles/all");
+    const { data } = await axios.get("/vehicles/all");
     return data;
   },
 );

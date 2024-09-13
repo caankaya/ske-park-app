@@ -6,7 +6,9 @@ export default function Layout() {
   return (
     <div className="h-screen w-full bg-base px-2">
       <Header />
-      <Outlet />
+      <main>
+        <Outlet data-testid="outlet" />
+      </main>
       <InfoModal />
     </div>
   );
