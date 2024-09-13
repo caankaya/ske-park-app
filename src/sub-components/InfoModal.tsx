@@ -4,13 +4,14 @@ import { useAppDispatch, useAppSelector } from "../redux/types";
 export default function InfoModal() {
   const dispatch = useAppDispatch();
   const isOpen = useAppSelector((state) => state.header.infoModal);
+  const infoModal = localStorage.getItem("infoModal");
   return (
     <dialog
       open={isOpen}
       className="fixed inset-0 z-20 h-screen w-full bg-primary/70"
     >
       <div
-        className="absolute left-1/2 top-1/2 m-auto h-[95%] w-1/2 -translate-x-1/2 -translate-y-1/2 transform overflow-y-scroll rounded-xl bg-secondary p-5 shadow-xl"
+        className="absolute left-1/2 top-1/2 m-auto h-[95%] w-[95%] laptop:w-1/2 -translate-x-1/2 -translate-y-1/2 transform overflow-y-scroll rounded-xl bg-secondary p-5 shadow-xl"
         style={{
           scrollbarWidth: "none",
         }}
@@ -20,6 +21,9 @@ export default function InfoModal() {
             className="absolute right-2 top-2 flex size-5 items-center justify-center rounded-full bg-primary text-xs font-bold text-secondary"
             onClick={() => {
               dispatch(toggleInfoModal(false));
+              if (!infoModal) {
+                localStorage.setItem("infoModal", "true");
+              }
             }}
           >
             ✕
@@ -51,7 +55,7 @@ export default function InfoModal() {
             vous montrer la création de composants et sous-composants,
             utilisation d'un router, mise en page, passage de props, typage avec
             TypeScript, gestion des états avec Redux et des états locaux,
-            gestion des différentes erreurs, requêtes asynchrones "GET" &
+            gestion des différentes erreurs, le responsive design requêtes asynchrones "GET" &
             "POST". ⚛️💻
           </p>
           <p className="my-2 text-sm">
@@ -216,9 +220,12 @@ export default function InfoModal() {
             correspond à une place et un véhicule spécifique à un moment donné.
           </p>
           <button
-            className="m-auto block h-8 w-40 rounded-md bg-info text-sm text-secondary"
+            className="m-auto block h-8 w-40 rounded-md bg-info text-sm text-secondary mt-2"
             onClick={() => {
               dispatch(toggleInfoModal(false));
+              if (!infoModal) {
+                localStorage.setItem("infoModal", "true");
+              }
             }}
           >
             Fermer la modal

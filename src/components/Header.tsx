@@ -7,8 +7,6 @@ import { toggleBurger, toggleInfoModal } from "../redux/reducers/header";
 export default function Header() {
   const dispatch = useAppDispatch();
   const burger = useAppSelector((state) => state.header.burger);
-  const isOpen = useAppSelector((state) => state.header.infoModal);
-  console.log("isOpen :", isOpen);
 
   return (
     <div

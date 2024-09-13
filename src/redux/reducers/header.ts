@@ -7,7 +7,7 @@ interface HeaderState {
 
 const initialState: HeaderState = {
   burger: false,
-  infoModal: true,
+  infoModal: localStorage.getItem("infoModal") ? false : true,
 };
 
 export const toggleBurger = createAction<boolean>(
