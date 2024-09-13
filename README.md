@@ -4,7 +4,7 @@ Bienvenue dans le projet SKE-PARK, une application de gestion de parking.
 
 ## Configuration
 
-Pour faire fonctionner le front, vous pouvez utiliser la chaîne de connexion suivante dans un fichier .env pour configurer votre base de données :
+Pour faire fonctionner le front, vous pouvez utiliser la chaîne de connexion suivante dans un fichier .env pour configurer l'url de l'api :
 
 ```env
 VITE_API_URL=http://localhost:3000
