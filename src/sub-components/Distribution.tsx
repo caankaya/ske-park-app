@@ -4,7 +4,6 @@ import { useAppSelector } from "../redux/types";
 
 export default function Distribution() {
   const vehicles = useAppSelector((state) => state.vehicles.all);
-  console.log("vehicles :", vehicles);
   return (
     <div className="flex w-full flex-col items-center justify-start gap-y-5 rounded-xl bg-secondary p-3 shadow-lg laptop:w-1/2">
       <p className="text-sm">Répartition des places</p>
