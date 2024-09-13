@@ -16,7 +16,7 @@ VITE_API_URL=http://localhost:3000
 
    ```bash
    git clone https://github.com/caankaya/ske-park-app.git
-   cd ske-park-backend
+   cd ske-park-app
    ```
 
 2. Installez les dépendances :
