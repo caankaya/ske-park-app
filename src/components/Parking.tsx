@@ -27,31 +27,29 @@ export default function Parking({ spots }: { spots: Spot[] }) {
           return (
             <div
               key={spot.number}
-              className="flex w-full flex-col items-center gap-y-5 rounded-xl bg-secondary shadow-lg desktop:w-[32%]"
+              className="flex w-full flex-col items-center justify-between gap-y-5 rounded-xl bg-secondary shadow-lg desktop:w-[32%]"
             >
               <div
                 className={`flex h-12 w-full items-center justify-center rounded-t-xl ${spot.state ? "bg-success" : "bg-error"}`}
               >
                 <p>{spot.number}</p>
               </div>
-              <div className="ml-5 self-start">
+              <div className="mr-auto flex flex-grow flex-col px-5">
                 <p className="text-sm">
                   Numéro de ticket : <b>{ticket?.reference}</b>
                 </p>
-                {
-                  <p className="text-sm">
-                    Heure d'arrivée :{" "}
-                    {ticket && (
-                      <b>
-                        {hours}h{minutes}
-                      </b>
-                    )}
-                  </p>
-                }
                 <p className="text-sm">
-                  Numéro d'immatriculation :{" "}
-                  <b>{ticket?.vehicle.immatriculation}</b>
+                  Immatriculation : <b>{ticket?.vehicle.immatriculation}</b>
                 </p>
+                <p className="text-sm">
+                  Heure d'arrivée :{" "}
+                  {ticket && (
+                    <b>
+                      {hours}h{minutes}
+                    </b>
+                  )}
+                </p>
+
                 <p className="text-sm">
                   Type de véhicule :{" "}
                   {ticket?.vehicle.type && (

@@ -38,13 +38,13 @@ export default function Counter() {
         </p>
         <p className="text-xs text-success">
           {available <= 1
-            ? available + " place est disponible"
-            : available + " places sont disponibles"}
+            ? available + " place disponible"
+            : available + " places disponibles"}
         </p>
         <p className="text-xs text-warning">
           {busy <= 1
-            ? busy + " place est disponible"
-            : busy + " places sont disponibles"}
+            ? busy + " place occupée"
+            : busy + " places occupées"}
         </p>
       </div>
     </div>

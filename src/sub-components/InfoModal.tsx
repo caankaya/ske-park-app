@@ -55,7 +55,7 @@ export default function InfoModal() {
             vous montrer la création de composants et sous-composants,
             utilisation d'un router, mise en page, passage de props, typage avec
             TypeScript, gestion des états avec Redux et des états locaux,
-            gestion des différentes erreurs, le responsive design requêtes asynchrones "GET" &
+            gestion des différentes erreurs, le responsive design, requêtes asynchrones "GET" &
             "POST". ⚛️💻
           </p>
           <p className="my-2 text-sm">
