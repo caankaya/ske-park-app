@@ -9,7 +9,7 @@ const store = configureStore({
     header: headerReducer,
     spots: spotReducer,
     vehicles: vehicleReducer,
-    tickets : ticketReducer
+    tickets: ticketReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -17,8 +17,8 @@ const store = configureStore({
     }),
 });
 
-export default store;
-
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+
+export default store;

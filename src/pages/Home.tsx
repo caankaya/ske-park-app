@@ -16,7 +16,7 @@ export default function Home() {
   }, [dispatch]);
 
   return (
-    <div className="mt-10 pb-10 flex flex-col items-center justify-center gap-y-5 bg-base max-tablet:px-5">
+    <div className="mt-10 flex flex-col items-center justify-center gap-y-5 bg-base pb-10 max-tablet:px-5">
       {/* Dashboard */}
       {<Dashboard />}
 

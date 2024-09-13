@@ -2,7 +2,7 @@ import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 import axios from "../../axios";
 import { IVehicle } from "../../@types/vehicle";
 
-interface VehicleState {
+export interface VehicleState {
   all: IVehicle | null;
 }
 
@@ -10,18 +10,24 @@ const initialState: VehicleState = {
   all: null,
 };
 
-export const getAllVehicles = createAsyncThunk(
-  "/getAllVehicles", // nom de l'action
+export const getAllVehicles = createAsyncThunk<IVehicle>(
+  "/getAllVehicles",
   async () => {
-    const { data } = await axios.get("/vehicles/all");
-    return data;
+    try {
+      const { data } = await axios.get("/vehicles/all");
+      return data;
+    } catch (error) {
+      console.warn(error);
+      throw new Error("Failed to fetch vehicles");
+    }
   },
 );
 
 const vehicleReducer = createReducer(initialState, (builder) => {
-  builder.addCase(getAllVehicles.fulfilled, (state, action) => {
-    state.all = action.payload;
-  });
+  builder
+    .addCase(getAllVehicles.fulfilled, (state, action) => {
+      state.all = action.payload;
+    })
 });
 
 export default vehicleReducer;
