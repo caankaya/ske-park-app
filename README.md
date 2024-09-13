@@ -1,4 +1,4 @@
-# SKE-PARK Backend
+# SKE-PARK Frontend
 
 Bienvenue dans le projet SKE-PARK, une application de gestion de parking.
 
